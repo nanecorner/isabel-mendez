@@ -11,11 +11,11 @@ export function SectionDissemination({ profile }: { profile: FullProfile }) {
         {profile.dissemination.map((item: any) => (
           <li key={item.id} className="card py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h3 className="font-semibold text-[0.9375rem] text-[#e8eaf0]">
+              <h3 className="font-semibold text-[0.9375rem] text-[var(--color-text)]">
                 {item.title}
               </h3>
               {item.date && (
-                <p className="text-sm text-[#8b93a8] mt-1">
+                <p className="text-sm text-[var(--color-muted)] mt-1">
                   {formatDate(item.date)}
                 </p>
               )}

@@ -1,10 +1,19 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { SectionHome } from "@/components/sections/SectionHome";
+import { SectionTrajectory } from "@/components/sections/SectionTrajectory";
 
-export default async function HomePage() {
+export async function generateMetadata() {
   const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG || "dra-maria-garcia";
+  const profile = await prisma.profile.findUnique({
+    where: { slug },
+    select: { name: true },
+  });
+  if (!profile) return { title: "No encontrado" };
+  return { title: `${profile.name} | Trayectoria` };
+}
 
+export default async function TrajectoryPage() {
+  const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG || "dra-maria-garcia";
   const profile = await prisma.profile.findUnique({
     where: { slug },
     include: {
@@ -25,5 +34,9 @@ export default async function HomePage() {
 
   if (!profile) return notFound();
 
-  return <SectionHome profile={profile as any} />;
+  return (
+    <div className="container-profile pb-16">
+      <SectionTrajectory profile={profile as any} />
+    </div>
+  );
 }

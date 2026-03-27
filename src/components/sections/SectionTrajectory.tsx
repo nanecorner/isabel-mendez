@@ -17,7 +17,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
         <div className="space-y-12">
           {profile.education.length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-[#e8eaf0]">
+              <h3 className="text-xl font-semibold mb-6 text-[var(--color-text)]">
                 Formación Educativa
               </h3>
               <div className="timeline">
@@ -34,7 +34,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
 
           {profile.teaching.length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-[#e8eaf0]">
+              <h3 className="text-xl font-semibold mb-6 text-[var(--color-text)]">
                 Docencia
               </h3>
               <div className="timeline">
@@ -54,7 +54,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
         <div className="space-y-12">
           {profile.experience.length > 0 && (
             <div>
-              <h3 className="text-xl font-semibold mb-6 text-[#e8eaf0]">
+              <h3 className="text-xl font-semibold mb-6 text-[var(--color-text)]">
                 Experiencia Profesional
               </h3>
               <div className="timeline">
@@ -72,11 +72,11 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
           )}
 
           {profile.cvUrl && (
-            <div className="card mt-8 bg-gradient-to-br from-[#1a2035] to-[#141829]">
-              <h3 className="font-semibold text-lg mb-2 text-[#e8eaf0]">
+            <div className="card mt-8 bg-gradient-to-br from-[var(--color-card)] to-[var(--color-bg)]">
+              <h3 className="font-semibold text-lg mb-2 text-[var(--color-text)]">
                 Curriculum Vitae
               </h3>
-              <p className="text-sm text-[#8b93a8] mb-4">
+              <p className="text-sm text-[var(--color-muted)] mb-4">
                 Consulta el CV en PDF completo.
               </p>
               <div className="flex gap-3">
@@ -105,7 +105,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                   <a
                     href={getStorageUrl("portafolios", profile.cvUrl) + "?download=true"}
                     download
-                    className="btn-ghost border-[#6366f1] text-[#e8eaf0] bg-[#6366f1]/10 hover:bg-[#6366f1]/20"
+                    className="btn-ghost border-[var(--color-accent)] text-[var(--color-text)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20"
                   >
                     Descargar
                   </a>

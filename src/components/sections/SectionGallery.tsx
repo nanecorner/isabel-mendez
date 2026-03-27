@@ -11,7 +11,7 @@ export function SectionGallery({ profile }: { profile: FullProfile }) {
       <div className="gallery-grid">
         {profile.gallery.map((item: any) => (
           <div key={item.id} className="gallery-item group">
-            <div className="relative aspect-4/3 w-full bg-[#1a2035]">
+            <div className="relative aspect-4/3 w-full bg-[var(--color-card)]">
               {item.imageUrl ? (
                 <Image
                   src={getStorageUrl("portafolios", item.imageUrl)}

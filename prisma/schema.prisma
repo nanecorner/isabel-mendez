@@ -41,6 +41,11 @@ model Profile {
   dissemination  Dissemination[]
   footerLinks    FooterLink[]
 
+  // Sección: Personalización Visual
+  themePrimary   String? @default("#ffffff") // Fondo principal
+  themeSecondary String? @default("#000000") // Acentos y botones
+  themeFont      String? @default("Montserrat") // Fuente principal
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

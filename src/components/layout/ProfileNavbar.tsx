@@ -1,29 +1,33 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { FullProfile } from "@/types/profile";
 
 export function ProfileNavbar({ profile }: { profile: FullProfile }) {
-  // Solo mostramos los links si hay contenido en la sección correspondiente
+  const pathname = usePathname();
+
+  // Ya no usamos slug dinámico, todas las rutas parten de la raíz del dominio
   const links = [
-    { label: "Inicio", href: "#inicio" },
+    { label: "Inicio", href: "/" },
     {
       label: "Trayectoria",
-      href: "#trayectoria",
+      href: `/trayectoria`,
       show: profile.education.length > 0 || profile.experience.length > 0 || profile.teaching.length > 0,
     },
     {
       label: "Publicaciones",
-      href: "#publicaciones",
+      href: `/publicaciones`,
       show: profile.publications.length > 0,
     },
     {
       label: "Galería",
-      href: "#galeria",
+      href: `/galeria`,
       show: profile.gallery.length > 0,
     },
     {
       label: "Divulgación",
-      href: "#divulgacion",
+      href: `/divulgacion`,
       show: profile.dissemination.length > 0,
     },
   ];
@@ -34,11 +38,18 @@ export function ProfileNavbar({ profile }: { profile: FullProfile }) {
         <nav>
           {links
             .filter((link) => link.show !== false)
-            .map((link) => (
-              <a key={link.href} href={link.href} className="nav-link">
-                {link.label}
-              </a>
-            ))}
+            .map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`nav-link ${isActive ? "active" : ""}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
         </nav>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const adapter = new PrismaPg(pool);
+const adapter = new PrismaPg(pool as any);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
@@ -228,6 +228,9 @@ async function main() {
       photoUrl: null,
       cvUrl: null,
       cvIsDownloadable: true,
+      themePrimary: "#f0fdf4", // Verde menta muy claro o blanco, vamos a usar #ffffff para limpio
+      themeSecondary: "#2563eb", // Azul royal
+      themeFont: "Inter",
 
       researchLines: {
         create: [
