@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { SectionDissemination } from "@/components/sections/SectionDissemination";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata() {
-  const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG || "dra-maria-garcia";
+  const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG;
+  if (!slug) return { title: "No configurado" };
   const profile = await prisma.profile.findUnique({
     where: { slug },
     select: { name: true },
@@ -13,7 +16,8 @@ export async function generateMetadata() {
 }
 
 export default async function DisseminationPage() {
-  const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG || "dra-maria-garcia";
+  const slug = process.env.NEXT_PUBLIC_PROFILE_SLUG;
+  if (!slug) return notFound();
   const profile = await prisma.profile.findUnique({
     where: { slug },
     include: {

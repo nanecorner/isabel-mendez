@@ -7,7 +7,11 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    console.warn("DATABASE_URL is not defined. Prisma check will fail.");
+  }
+  const pool = new Pool({ connectionString: url });
   const adapter = new PrismaPg(pool as any);
   return new PrismaClient({
     adapter,
