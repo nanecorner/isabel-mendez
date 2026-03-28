@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portafolio Profesional - Plantilla de Visualización
 
-## Getting Started
+Esta es la aplicación principal (frontend) para visualizar los portafolios profesionales. Está construida con **Next.js 16**, **Tailwind CSS 4** y **Prisma v7**.
 
-First, run the development server:
+## 🛠️ Requisitos e Instalación
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Instalar dependencias**:
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Configurar el entorno**:
+   Copia el archivo `.env.example` a `.env.local` y completa las variables de Supabase y la URL de la base de datos:
+   ```bash
+   cp .env.example .env.local
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Generar el cliente de base de datos**:
+   ```bash
+   npx prisma generate
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Ejecutar en desarrollo**:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+## ⚙️ Configuración (Variables de Entorno)
 
-To learn more about Next.js, take a look at the following resources:
+- `DATABASE_URL`: URL de conexión a PostgreSQL (Supabase).
+- `NEXT_PUBLIC_SUPABASE_URL`: URL pública de tu instancia de Supabase.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Key anónima para el acceso al Storage.
+- `NEXT_PUBLIC_PROFILE_SLUG`: El identificador (slug) del perfil que la plantilla debe renderizar por defecto.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Despliegue
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Esta aplicación está optimizada para desplegarse en **Vercel** o **Netlify**. Asegúrate de:
+1. Configurar todas las variables de entorno en el panel del proveedor.
+2. El comando de construcción estándar (`npm run build`) se encargará de generar el cliente Prisma automáticamente.
 
-## Deploy on Vercel
+## 📂 Estructura del Proyecto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/src/app`: Rutas del App Router de Next.js.
+- `/prisma`: Esquema de la base de datos (`schema.prisma`).
+- `/public`: Activos estáticos.
+- `prisma.config.ts`: Configuración específica para el CLI de Prisma 7.
