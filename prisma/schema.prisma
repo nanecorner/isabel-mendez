@@ -46,6 +46,8 @@ model Profile {
   themeSecondary String? @default("#000000") // Acentos y botones
   themeFont      String? @default("Montserrat") // Fuente principal
 
+  password       String? // Log-in dashboard password
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -111,6 +113,8 @@ model Education {
   graduationDate String // ej. "2015" o "Enero 2015"
   degree         String
   institution    String
+  city           String?
+  country        String?
   order          Int    @default(0) // orden cronológico
 }
 
@@ -123,6 +127,8 @@ model Experience {
   endDate     String? // null = "presente"
   title       String
   institution String
+  city        String?
+  country     String?
   order       Int     @default(0)
 }
 
@@ -134,6 +140,8 @@ model Teaching {
   curriculum  String // plan de estudio
   course      String
   institution String
+  city        String?
+  country     String?
   order       Int    @default(0)
 }
 
