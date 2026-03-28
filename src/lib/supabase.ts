@@ -17,8 +17,11 @@ export const supabaseAdmin = () => {
   });
 };
 
-// Helper: obtener URL pública de un archivo en Storage
 export function getStorageUrl(bucket: string, path: string): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("data:")) {
+    return path;
+  }
   const { data } = supabase.storage.from(bucket).getPublicUrl(path);
   return data.publicUrl;
 }
