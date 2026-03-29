@@ -4,21 +4,40 @@ import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
+  pool: Pool | undefined;
 };
 
 function createPrismaClient() {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    console.warn("DATABASE_URL is not defined. Prisma check will fail.");
+    console.warn("DATABASE_URL is not defined in environment variables.");
+    return { client: new PrismaClient(), pool: undefined };
   }
-  const pool = new Pool({ connectionString: url });
+
+  // Pool de pg con límites agresivos para Serverless/Vercel
+  const pool = new Pool({ 
+    connectionString: url,
+    max: 3, // Muy bajo para evitar saturar el pooler desde múltiples lambdas de Vercel
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 5000,
+  });
+
   const adapter = new PrismaPg(pool as any);
-  return new PrismaClient({
+  const client = new PrismaClient({
     adapter,
     log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });
+
+  return { client, pool };
 }
 
-export const prisma = globalForPrisma.prisma ?? createPrismaClient();
+const { client, pool } = globalForPrisma.prisma && globalForPrisma.pool 
+  ? { client: globalForPrisma.prisma, pool: globalForPrisma.pool }
+  : createPrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+export const prisma = client;
+
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = client;
+  globalForPrisma.pool = pool;
+}
