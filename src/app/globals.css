@@ -4,13 +4,14 @@
 /* ─── Design tokens ─────────────────────────────────── */
 :root, .custom-theme-wrapper {
   --color-bg:        var(--color-bg-custom, #ffffff);
-  --color-surface:   color-mix(in srgb, var(--color-bg) 95%, #000000);
-  --color-border:    color-mix(in srgb, var(--color-bg) 85%, #000000);
   --color-accent:    var(--color-accent-custom, #000000);
   --color-accent-2:  var(--color-accent-custom, #000000);
+  /* These are overridden per-profile by the server layout (adaptive light/dark) */
   --color-text:      #111827;
   --color-muted:     #4b5563;
-  --color-card:      color-mix(in srgb, var(--color-bg) 98%, #ffffff);
+  --color-border:    rgba(0, 0, 0, 0.12);
+  --color-surface:   rgba(0, 0, 0, 0.04);
+  --color-card:      rgba(0, 0, 0, 0.025);
   --radius:          0.75rem;
   --radius-sm:       0.375rem;
 }
