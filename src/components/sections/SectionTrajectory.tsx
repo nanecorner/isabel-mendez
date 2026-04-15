@@ -4,11 +4,12 @@ import { SectionBlock } from "../layout/SectionBlock";
 
 export function SectionTrajectory({ profile }: { profile: FullProfile }) {
   const hasContent =
-    profile.education.length > 0 ||
+    profile.education.length  > 0 ||
     profile.experience.length > 0 ||
-    profile.teaching.length > 0;
+    profile.teaching.length   > 0;
 
   if (!hasContent) return null;
+
 
   return (
     <SectionBlock id="trayectoria" title="Trayectoria">
@@ -80,36 +81,43 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                 Consulta el CV en PDF completo.
               </p>
               <div className="flex gap-3">
-                <a
-                  href={getStorageUrl("portafolios", profile.cvUrl)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M2 12h4l3-9 5 18 3-9h5" />
-                  </svg>
-                  Ver PDF
-                </a>
-                {profile.cvIsDownloadable && (
-                  <a
-                    href={getStorageUrl("portafolios", profile.cvUrl) + "?download=true"}
-                    download
-                    className="btn-ghost border-[var(--color-accent)] text-[var(--color-text)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20"
-                  >
-                    Descargar
-                  </a>
-                )}
+                {(() => {
+                  const url = getStorageUrl("portafolios", profile.cvUrl!);
+                  const fileNameParts = profile.cvUrl!.split('/').pop() || "Curriculum.pdf";
+                  const originalFileName = fileNameParts.replace(/^\d+-/, '');
+                  return (
+                    <>
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-ghost"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M2 12h4l3-9 5 18 3-9h5" />
+                        </svg>
+                        Ver PDF
+                      </a>
+                      <a
+                        href={`${url}?download=${originalFileName}`}
+                        download={originalFileName}
+                        className="btn-ghost border-[var(--color-accent)] text-[var(--color-text)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20"
+                      >
+                        Descargar
+                      </a>
+                    </>
+                  );
+                })()}
               </div>
             </div>
           )}

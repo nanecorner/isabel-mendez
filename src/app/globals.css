@@ -33,6 +33,15 @@ h1, h2, h3, h4 {
   font-family: var(--font-family-custom, 'Lora'), Georgia, serif;
   line-height: 1.3;
   font-weight: 600;
+  color: var(--color-text);
+}
+
+p, li, span, blockquote {
+  color: inherit;
+}
+
+a {
+  color: var(--color-accent);
 }
 
 /* ─── Scrollbar ──────────────────────────────────────── */

@@ -52,7 +52,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
                     {line.title}
                   </h4>
                   {line.paragraphs.map((p: string, i: number) => (
-                    <p key={i} className="text-[0.9375rem] text-[var(--color-muted)] mb-2 last:mb-0">
+                    <p key={i} className="text-[0.9375rem] text-[var(--color-muted)] mb-2 last:mb-0 whitespace-pre-line">
                       {p}
                     </p>
                   ))}
