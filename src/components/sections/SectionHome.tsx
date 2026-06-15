@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { FullProfile } from "@/types/profile";
-import { getStorageUrl } from "@/lib/supabase";
 
 export function SectionHome({ profile }: { profile: FullProfile }) {
   return (
@@ -9,7 +8,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
       <div className="relative w-full min-h-[70vh] flex items-end mb-16 overflow-hidden">
         {profile.photoUrl ? (
           <Image
-            src={getStorageUrl("portafolios", profile.photoUrl)}
+            src={profile.photoUrl}
             alt={`Foto de ${profile.name}`}
             fill
             className="object-cover absolute inset-0 z-0"
@@ -46,7 +45,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
               Líneas de Investigación
             </h3>
             <div className="research-grid">
-              {profile.researchLines.map((line: any) => (
+              {profile.researchLines.map((line) => (
                 <div key={line.id} className="card">
                   <h4 className="font-semibold text-[var(--color-text)] mb-3 text-lg">
                     {line.title}
@@ -72,7 +71,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
                   Reconocimientos
                 </h3>
                 <ul className="space-y-2">
-                  {profile.awards.map((award: any) => (
+                  {profile.awards.map((award) => (
                     <li key={award.id} className="text-[0.9375rem]">
                       <span className="text-[var(--color-text)]">{award.title}</span>
                       {award.year && (
@@ -92,7 +91,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
                   Sociedades Científicas
                 </h3>
                 <div className="tags-list">
-                  {profile.societies.map((soc: any) => (
+                  {profile.societies.map((soc) => (
                     <span key={soc.id} className="tag">
                       {soc.name}
                     </span>
@@ -110,7 +109,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
                   Financiamientos
                 </h3>
                 <ul className="space-y-2 text-[0.9375rem]">
-                  {profile.fundings.map((funding: any) => (
+                  {profile.fundings.map((funding) => (
                     <li key={funding.id}>
                       {funding.url ? (
                         <a
@@ -136,7 +135,7 @@ export function SectionHome({ profile }: { profile: FullProfile }) {
                   Colaboraciones Activas
                 </h3>
                 <ul className="space-y-2 text-[0.9375rem]">
-                  {profile.collaborations.map((collab: any) => (
+                  {profile.collaborations.map((collab) => (
                     <li key={collab.id}>
                       {collab.url ? (
                         <a

@@ -1,5 +1,4 @@
 import type { FullProfile } from "@/types/profile";
-import { getStorageUrl } from "@/lib/supabase";
 import { formatDate } from "@/utils/formatDate";
 import { SectionBlock } from "../layout/SectionBlock";
 
@@ -9,7 +8,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
   return (
     <SectionBlock id="publicaciones" title="Publicaciones">
       <div className="space-y-4">
-        {profile.publications.map((pub: any) => (
+        {profile.publications.map((pub) => (
           <article key={pub.id} className="pub-item">
             <div className="pub-year">{formatDate(pub.date)}</div>
             <div>
@@ -31,7 +30,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
                 {pub.pdfUrl && (
                   <>
                     <a
-                      href={getStorageUrl("portafolios", pub.pdfUrl)}
+                      href={pub.pdfUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-ghost"
@@ -40,7 +39,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
                     </a>
                     {pub.isDownloadable && (
                       <a
-                        href={getStorageUrl("portafolios", pub.pdfUrl) + "?download=true"}
+                        href={pub.pdfUrl}
                         download
                         className="btn-ghost"
                       >

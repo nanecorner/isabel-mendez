@@ -7,7 +7,6 @@ import type { FullProfile } from "@/types/profile";
 export function ProfileNavbar({ profile }: { profile: FullProfile }) {
   const pathname = usePathname();
 
-  // Ya no usamos slug dinámico, todas las rutas parten de la raíz del dominio
   const links = [
     { label: "Inicio", href: "/" },
     {

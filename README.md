@@ -1,46 +1,36 @@
-# Portafolio Profesional - Plantilla de Visualización
+# Portafolio de Isabel Méndez
 
-Esta es la aplicación principal (frontend) para visualizar los portafolios profesionales. Está construida con **Next.js 16**, **Tailwind CSS 4** y **Prisma v7**.
+Sitio web estático construido con **Next.js 16** y **Tailwind CSS 4**.
 
-## 🛠️ Requisitos e Instalación
+## 🚀 Inicio rápido
 
-1. **Instalar dependencias**:
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+npm run dev
+```
 
-2. **Configurar el entorno**:
-   Copia el archivo `.env.example` a `.env.local` y completa las variables de Supabase y la URL de la base de datos:
-   ```bash
-   cp .env.example .env.local
-   ```
+## ✏️ Editar contenido
 
-3. **Generar el cliente de base de datos**:
-   ```bash
-   npx prisma generate
-   ```
+Todos los datos del perfil están en un solo archivo:
 
-4. **Ejecutar en desarrollo**:
-   ```bash
-   npm run dev
-   ```
+```
+src/lib/profile-data.ts
+```
 
-## ⚙️ Configuración (Variables de Entorno)
+Edita ese archivo para actualizar nombre, biografía, publicaciones, trayectoria, galería, etc.
 
-- `DATABASE_URL`: URL de conexión a PostgreSQL (Supabase).
-- `NEXT_PUBLIC_SUPABASE_URL`: URL pública de tu instancia de Supabase.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Key anónima para el acceso al Storage.
-- `NEXT_PUBLIC_PROFILE_SLUG`: El identificador (slug) del perfil que la plantilla debe renderizar por defecto.
+## 🖼️ Imágenes
 
-## 🚀 Despliegue
+Coloca las imágenes en `/public/` y referencialas con rutas relativas, por ejemplo:
 
-Esta aplicación está optimizada para desplegarse en **Vercel** o **Netlify**. Asegúrate de:
-1. Configurar todas las variables de entorno en el panel del proveedor.
-2. El comando de construcción estándar (`npm run build`) se encargará de generar el cliente Prisma automáticamente.
+- `/foto-perfil.jpg` para `photoUrl`
+- `/gallery/congreso.jpg` para imágenes de la galería
+- URL directa a un PDF externo para `cvUrl`
 
-## 📂 Estructura del Proyecto
+## 📦 Despliegue
 
-- `/src/app`: Rutas del App Router de Next.js.
-- `/prisma`: Esquema de la base de datos (`schema.prisma`).
-- `/public`: Activos estáticos.
-- `prisma.config.ts`: Configuración específica para el CLI de Prisma 7.
+```bash
+npm run build
+```
+
+Compatible con **Vercel**, **Netlify** o cualquier hosting de archivos estáticos.

@@ -1,5 +1,4 @@
 import type { FullProfile } from "@/types/profile";
-import { getStorageUrl } from "@/lib/supabase";
 import { SectionBlock } from "../layout/SectionBlock";
 
 export function SectionTrajectory({ profile }: { profile: FullProfile }) {
@@ -9,7 +8,6 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
     profile.teaching.length   > 0;
 
   if (!hasContent) return null;
-
 
   return (
     <SectionBlock id="trayectoria" title="Trayectoria">
@@ -22,7 +20,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                 Formación Educativa
               </h3>
               <div className="timeline">
-                {profile.education.map((edu: any) => (
+                {profile.education.map((edu) => (
                   <div key={edu.id} className="timeline-item">
                     <div className="timeline-date">{edu.graduationDate}</div>
                     <div className="timeline-title">{edu.degree}</div>
@@ -39,7 +37,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                 Docencia
               </h3>
               <div className="timeline">
-                {profile.teaching.map((teach: any) => (
+                {profile.teaching.map((teach) => (
                   <div key={teach.id} className="timeline-item">
                     <div className="timeline-date">{teach.curriculum}</div>
                     <div className="timeline-title">{teach.course}</div>
@@ -59,7 +57,7 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                 Experiencia Profesional
               </h3>
               <div className="timeline">
-                {profile.experience.map((exp: any) => (
+                {profile.experience.map((exp) => (
                   <div key={exp.id} className="timeline-item">
                     <div className="timeline-date">
                       {exp.startDate} — {exp.endDate || "Presente"}
@@ -81,43 +79,34 @@ export function SectionTrajectory({ profile }: { profile: FullProfile }) {
                 Consulta el CV en PDF completo.
               </p>
               <div className="flex gap-3">
-                {(() => {
-                  const url = getStorageUrl("portafolios", profile.cvUrl!);
-                  const fileNameParts = profile.cvUrl!.split('/').pop() || "Curriculum.pdf";
-                  const originalFileName = fileNameParts.replace(/^\d+-/, '');
-                  return (
-                    <>
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-ghost"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M2 12h4l3-9 5 18 3-9h5" />
-                        </svg>
-                        Ver PDF
-                      </a>
-                      <a
-                        href={`${url}?download=${originalFileName}`}
-                        download={originalFileName}
-                        className="btn-ghost border-[var(--color-accent)] text-[var(--color-text)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20"
-                      >
-                        Descargar
-                      </a>
-                    </>
-                  );
-                })()}
+                <a
+                  href={profile.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2 12h4l3-9 5 18 3-9h5" />
+                  </svg>
+                  Ver PDF
+                </a>
+                <a
+                  href={profile.cvUrl}
+                  download
+                  className="btn-ghost border-[var(--color-accent)] text-[var(--color-text)] bg-[var(--color-accent)]/10 hover:bg-[var(--color-accent)]/20"
+                >
+                  Descargar
+                </a>
               </div>
             </div>
           )}

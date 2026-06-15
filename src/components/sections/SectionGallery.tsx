@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { FullProfile } from "@/types/profile";
-import { getStorageUrl } from "@/lib/supabase";
 import { SectionBlock } from "../layout/SectionBlock";
 
 export function SectionGallery({ profile }: { profile: FullProfile }) {
@@ -9,12 +8,12 @@ export function SectionGallery({ profile }: { profile: FullProfile }) {
   return (
     <SectionBlock id="galeria" title="Galería Fotográfica">
       <div className="gallery-grid">
-        {profile.gallery.map((item: any) => (
+        {profile.gallery.map((item) => (
           <div key={item.id} className="gallery-item group">
             <div className="relative aspect-4/3 w-full bg-[var(--color-card)]">
               {item.imageUrl ? (
                 <Image
-                  src={getStorageUrl("portafolios", item.imageUrl)}
+                  src={item.imageUrl}
                   alt={item.shortName}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"

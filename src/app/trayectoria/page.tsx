@@ -1,22 +1,14 @@
-import { notFound } from "next/navigation";
-import { getProfileName, getProfileForTrajectory } from "@/lib/data";
+import { profile } from "@/lib/profile-data";
 import { SectionTrajectory } from "@/components/sections/SectionTrajectory";
 
-export const dynamic = "force-dynamic";
-
-export async function generateMetadata() {
-  const profile = await getProfileName();
-  if (!profile) return { title: "No encontrado" };
+export function generateMetadata() {
   return { title: `${profile.name} | Trayectoria` };
 }
 
-export default async function TrajectoryPage() {
-  const profile = await getProfileForTrajectory();
-  if (!profile) return notFound();
-
+export default function TrajectoryPage() {
   return (
     <div className="container-profile pb-16">
-      <SectionTrajectory profile={profile as any} />
+      <SectionTrajectory profile={profile} />
     </div>
   );
 }
