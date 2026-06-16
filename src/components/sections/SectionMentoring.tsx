@@ -26,7 +26,7 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
     <div className="container-profile pb-16">
 
       {/* ── Resumen numérico ────────────────────────── */}
-      <section className="py-12 border-b border-[var(--color-border)]">
+      <section className="py-12 border-b border-[#e2e8f0]">
         <h2 className="section-title">Formación de Recursos Humanos</h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {LEVEL_ORDER.map((lv) => {
@@ -34,8 +34,8 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
             if (total === 0) return null;
             return (
               <div key={lv} className="card text-center">
-                <div className="text-4xl font-bold text-[var(--color-accent)] mb-1">{total}</div>
-                <div className="text-sm text-[var(--color-muted)]">{LEVEL_LABELS[lv]}</div>
+                <div className="text-4xl font-bold text-[#4f46e5] mb-1">{total}</div>
+                <div className="text-sm text-[#64748b]">{LEVEL_LABELS[lv]}</div>
               </div>
             );
           })}
@@ -52,10 +52,10 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
                   <span className="thesis-level-badge">{LEVEL_LABELS[t.level]}</span>
                   <span className="thesis-status en-proceso">En proceso</span>
                 </div>
-                <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-1">
+                <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-1">
                   {t.thesisTitle}
                 </h4>
-                <p className="text-sm text-[var(--color-muted)]">
+                <p className="text-sm text-[#64748b]">
                   {t.studentName} · {t.institution}
                 </p>
               </div>
@@ -71,23 +71,23 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
           if (group.length === 0) return null;
           return (
             <div key={lv} className="mb-10 last:mb-0">
-              <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                 {LEVEL_LABELS[lv]} ({group.length})
               </h3>
               <div className="space-y-3">
                 {group.map((t) => (
                   <div key={t.id} className="card thesis-card-sm">
-                    <div className="flex items-start justify-between gap-3 flex-wrap">
-                      <div>
-                        <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-0.5">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0 pr-2">
+                        <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-0.5">
                           {t.thesisTitle}
                         </h4>
-                        <p className="text-sm text-[var(--color-muted)]">
+                        <p className="text-sm text-[#64748b]">
                           {t.studentName} · {t.institution}
                         </p>
                       </div>
                       {t.year && (
-                        <span className="text-sm font-semibold text-[var(--color-accent)] shrink-0">
+                        <span className="text-sm font-semibold text-[#4f46e5] shrink-0">
                           {t.year}
                         </span>
                       )}
@@ -108,14 +108,14 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
               const items = profile.otherAdvising.filter(a => a.type === type);
               return (
                 <div key={type}>
-                  <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                  <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                     {type} ({items.length})
                   </h3>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {items.map(item => (
                       <div key={item.id} className="card flex items-start gap-3">
                         <div className="committee-dot mt-1.5 shrink-0" />
-                        <p className="text-sm text-[var(--color-text)] leading-relaxed">
+                        <p className="text-sm text-[#0f172a] leading-relaxed">
                           {item.description}
                         </p>
                       </div>

@@ -62,58 +62,43 @@ export function SectionAbout({ profile }: { profile: FullProfile }) {
       </section>
 
       {/* ── Bio + Trayectoria ──────────────────────────── */}
-      <div className="bg-[var(--color-bg)]">
+      <div className="bg-[#ffffff]">
         <div className="container-profile py-16">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
 
             {/* Resumen biográfico */}
             <div className="lg:col-span-3">
               <h2 className="section-title">Sobre Mí</h2>
-              <p className="text-[1.0625rem] text-[var(--color-muted)] leading-relaxed">
+              <p className="text-[1.0625rem] text-[#64748b] leading-relaxed">
                 {profile.bio}
               </p>
 
               {/* Formación académica (grados) */}
               <div className="mt-10">
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Formación Académica
                 </h3>
-                <div className="space-y-2">
-                  <div className="degree-item">
-                    <span className="degree-label">Doctorado</span>
-                    <span>Ciencias Biomédicas — UNAM</span>
-                  </div>
-                  <div className="degree-item">
-                    <span className="degree-label">Maestría</span>
-                    <span>Ciencias Biomédicas — UNAM</span>
-                  </div>
-                  <div className="degree-item">
-                    <span className="degree-label">Licenciatura</span>
-                    <span>Química Farmacéutica Biológica (QFB) — UNAM</span>
-                  </div>
+                <div className="space-y-3">
+                  {profile.degrees.map((deg) => (
+                    <div key={deg.id} className="degree-item flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4">
+                      <span className="degree-label pt-1">{deg.level}</span>
+                      <div className="flex flex-col">
+                        <span className="font-semibold text-[#0f172a] leading-snug">{deg.title}</span>
+                        <span className="text-[0.875rem] text-[#64748b] mt-0.5">
+                          {deg.institution} <span className="font-medium text-[#4f46e5]">({deg.year})</span>
+                        </span>
+                        {deg.thesis && (
+                          <span className="text-[0.8125rem] text-[#64748b] mt-1.5 italic">
+                            Tesis: "{deg.thesis}"
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Cursos de actualización */}
-              {profile.training && profile.training.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
-                    Cursos de Actualización
-                  </h3>
-                  <div className="space-y-4">
-                    {profile.training.map((t) => (
-                      <div key={t.id} className="degree-item flex flex-col gap-1 items-start">
-                        <span className="font-semibold text-[var(--color-text)]">{t.title}</span>
-                        <span className="text-sm text-[var(--color-muted)]">
-                          {t.institution}
-                          {t.duration && ` • ${t.duration}`}
-                          {t.date && ` • ${t.date}`}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+
             </div>
 
             {/* Trayectoria profesional */}
@@ -131,6 +116,53 @@ export function SectionAbout({ profile }: { profile: FullProfile }) {
             </div>
 
           </div>
+
+          {/* Cursos de actualización */}
+          {profile.training && profile.training.length > 0 && (
+            <div className="mt-16 pt-10 border-t border-[#e2e8f0]">
+              <h2 className="text-2xl font-bold text-[#0f172a] mb-6">Cursos de Actualización y Formación Continua</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                {profile.training.slice(0, 3).map((t) => (
+                  <div key={t.id} className="card p-4 h-full flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] leading-snug mb-2">{t.title}</h4>
+                      <p className="text-xs text-[#64748b] mb-1">{t.institution}</p>
+                    </div>
+                    <div className="flex justify-between items-center mt-3 pt-2 border-t border-[#e2e8f0]">
+                      {t.date && <span className="text-xs text-[#4f46e5] bg-[#4f46e5]/10 px-2 py-0.5 rounded">{t.date}</span>}
+                      {t.duration && <span className="text-xs text-[#64748b]">{t.duration}</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {profile.training.length > 3 && (
+                <details className="group mt-6">
+                  <summary className="font-semibold text-[#4f46e5] cursor-pointer flex items-center gap-2 select-none hover:text-[#4338ca] transition-colors list-none [&::-webkit-details-marker]:hidden w-fit">
+                    Ver {profile.training.length - 3} cursos más...
+                    <svg className="w-5 h-5 transform transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    {profile.training.slice(3).map((t) => (
+                      <div key={t.id} className="card p-4 h-full flex flex-col justify-between">
+                        <div>
+                          <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] leading-snug mb-2">{t.title}</h4>
+                          <p className="text-xs text-[#64748b] mb-1">{t.institution}</p>
+                        </div>
+                        <div className="flex justify-between items-center mt-3 pt-2 border-t border-[#e2e8f0]">
+                          {t.date && <span className="text-xs text-[#4f46e5] bg-[#4f46e5]/10 px-2 py-0.5 rounded">{t.date}</span>}
+                          {t.duration && <span className="text-xs text-[#64748b]">{t.duration}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

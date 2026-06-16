@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 import type { FullProfile } from "@/types/profile";
 
 const NAV_LINKS = [
-  { label: "Inicio",        href: "/" },
-  { label: "Investigación", href: "/investigacion" },
-  { label: "Publicaciones", href: "/publicaciones" },
-  { label: "Formación",     href: "/formacion" },
-  { label: "Docencia",      href: "/docencia" },
-  { label: "Divulgación",   href: "/divulgacion" },
+  { label: "Inicio",            href: "/" },
+  { label: "Investigación",     href: "/investigacion" },
+  { label: "Publicaciones",     href: "/publicaciones" },
+  { label: "Tesis y Asesorías", href: "/asesorias" },
+  { label: "Docencia",          href: "/docencia" },
+  { label: "Divulgación",       href: "/divulgacion" },
 ];
 
 export function ProfileNavbar({ profile }: { profile: FullProfile }) {

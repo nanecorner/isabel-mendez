@@ -92,7 +92,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
 
             {books.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Libros
                 </h3>
                 <div className="space-y-0">
@@ -116,7 +116,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
 
             {chapters.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Capítulos de Libro
                 </h3>
                 <div className="space-y-0">
@@ -148,7 +148,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
             
             {editorials.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Editorial
                 </h3>
                 <div className="space-y-0">
@@ -172,7 +172,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
 
             {abstracts.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Resúmenes de Congreso con Arbitraje
                 </h3>
                 <div className="space-y-0">
@@ -196,7 +196,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
 
             {proceedings.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Memorias In Extenso
                 </h3>
                 <div className="space-y-0">
@@ -220,7 +220,7 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
 
             {outreach.length > 0 && (
               <div>
-                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-4">
                   Artículos de Difusión y Divulgación
                 </h3>
                 <div className="space-y-0">
@@ -252,14 +252,14 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {profile.editorialRoles.map((role) => (
               <div key={role.id} className="card">
-                <p className="text-xs font-semibold text-[var(--color-accent)] uppercase tracking-wider mb-1">
+                <p className="text-xs font-semibold text-[#4f46e5] uppercase tracking-wider mb-1">
                   {role.role}
                 </p>
-                <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] leading-snug mb-1">
+                <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] leading-snug mb-1">
                   {role.journal}
                 </h4>
                 {role.publisher && (
-                  <p className="text-xs text-[var(--color-muted)]">{role.publisher}</p>
+                  <p className="text-xs text-[#64748b]">{role.publisher}</p>
                 )}
                 {role.url && (
                   <a

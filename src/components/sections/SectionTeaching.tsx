@@ -14,19 +14,19 @@ export function SectionTeaching({ profile }: { profile: FullProfile }) {
 
           {asCoord.length > 0 && (
             <div>
-              <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-5">
+              <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-5">
                 Como Coordinadora
               </h3>
               <div className="space-y-4">
                 {asCoord.map((c) => (
                   <div key={c.id} className="card">
-                    <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-1">
+                    <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-1">
                       {c.name}
                     </h4>
-                    <p className="text-sm text-[var(--color-muted)]">{c.program}</p>
-                    <p className="text-sm text-[var(--color-muted)]">{c.institution}</p>
+                    <p className="text-sm text-[#64748b]">{c.program}</p>
+                    <p className="text-sm text-[#64748b]">{c.institution}</p>
                     {c.period && (
-                      <p className="text-xs text-[var(--color-accent)] font-semibold mt-2">{c.period}</p>
+                      <p className="text-xs text-[#4f46e5] font-semibold mt-2">{c.period}</p>
                     )}
                   </div>
                 ))}
@@ -36,19 +36,19 @@ export function SectionTeaching({ profile }: { profile: FullProfile }) {
 
           {asGuest.length > 0 && (
             <div>
-              <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-5">
+              <h3 className="text-sm font-semibold text-[#64748b] uppercase tracking-wider mb-5">
                 Como Profesora Invitada / Colaboradora
               </h3>
               <div className="space-y-4">
                 {asGuest.map((c) => (
                   <div key={c.id} className="card">
-                    <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-1">
+                    <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-1">
                       {c.name}
                     </h4>
-                    <p className="text-sm text-[var(--color-muted)]">{c.program}</p>
-                    <p className="text-sm text-[var(--color-muted)]">{c.institution}</p>
+                    <p className="text-sm text-[#64748b]">{c.program}</p>
+                    <p className="text-sm text-[#64748b]">{c.institution}</p>
                     {c.period && (
-                      <p className="text-xs text-[var(--color-accent)] font-semibold mt-2">{c.period}</p>
+                      <p className="text-xs text-[#4f46e5] font-semibold mt-2">{c.period}</p>
                     )}
                   </div>
                 ))}
@@ -66,12 +66,12 @@ export function SectionTeaching({ profile }: { profile: FullProfile }) {
               <div key={cm.id} className="card flex items-start gap-4">
                 <div className="committee-dot mt-1 shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] leading-tight mb-1">
+                  <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] leading-tight mb-1">
                     {cm.role}
                   </h4>
-                  <p className="text-sm text-[var(--color-muted)] leading-tight">{cm.organization}</p>
+                  <p className="text-sm text-[#64748b] leading-tight">{cm.organization}</p>
                   {cm.period && (
-                    <p className="text-xs text-[var(--color-accent)] font-semibold mt-1.5">{cm.period}</p>
+                    <p className="text-xs text-[#4f46e5] font-semibold mt-1.5">{cm.period}</p>
                   )}
                 </div>
               </div>
@@ -86,10 +86,10 @@ export function SectionTeaching({ profile }: { profile: FullProfile }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {profile.societies.map((soc) => (
               <div key={soc.id} className="card">
-                <div className="text-2xl font-bold text-[var(--color-accent)] mb-1">
+                <div className="text-2xl font-bold text-[#4f46e5] mb-1">
                   {soc.acronym}
                 </div>
-                <p className="text-sm text-[var(--color-muted)] leading-snug">
+                <p className="text-sm text-[#64748b] leading-snug">
                   {soc.fullName}
                 </p>
                 {soc.url && (

@@ -13,10 +13,10 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
         <div className="research-grid">
           {profile.researchLines.map((line) => (
             <div key={line.id} className="card research-card">
-              <h3 className="font-semibold text-[var(--color-text)] text-lg mb-3">
+              <h3 className="font-semibold text-[#0f172a] text-lg mb-3">
                 {line.title}
               </h3>
-              <p className="text-[0.9375rem] text-[var(--color-muted)] mb-4 leading-relaxed">
+              <p className="text-[0.9375rem] text-[#64748b] mb-4 leading-relaxed">
                 {line.description}
               </p>
               <div className="tags-list">
@@ -42,15 +42,15 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
                     <span className="project-code">{p.code}</span>
                     <span className="project-status vigente">Vigente</span>
                   </div>
-                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-2 leading-snug">
+                  <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-2 leading-snug">
                     {p.title}
                   </h4>
-                  <div className="flex flex-wrap gap-4 text-sm text-[var(--color-muted)]">
-                    <span><strong className="text-[var(--color-text)]">Agencia:</strong> {p.agency}</span>
-                    <span><strong className="text-[var(--color-text)]">Rol:</strong> {p.role}</span>
-                    <span><strong className="text-[var(--color-text)]">Período:</strong> {p.period}</span>
+                  <div className="flex flex-wrap gap-4 text-sm text-[#64748b]">
+                    <span><strong className="text-[#0f172a]">Agencia:</strong> {p.agency}</span>
+                    <span><strong className="text-[#0f172a]">Rol:</strong> {p.role}</span>
+                    <span><strong className="text-[#0f172a]">Período:</strong> {p.period}</span>
                     {p.budget && (
-                      <span><strong className="text-[var(--color-text)]">Monto:</strong> {p.budget}</span>
+                      <span><strong className="text-[#0f172a]">Monto:</strong> {p.budget}</span>
                     )}
                   </div>
                 </div>
@@ -69,15 +69,15 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
                     <span className="project-code">{p.code}</span>
                     <span className="project-status concluido">Concluido</span>
                   </div>
-                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-2 leading-snug">
+                  <h4 className="font-semibold text-[#0f172a] text-[0.9375rem] mb-2 leading-snug">
                     {p.title}
                   </h4>
-                  <div className="flex flex-wrap gap-4 text-sm text-[var(--color-muted)]">
-                    <span><strong className="text-[var(--color-text)]">Agencia:</strong> {p.agency}</span>
-                    <span><strong className="text-[var(--color-text)]">Rol:</strong> {p.role}</span>
-                    <span><strong className="text-[var(--color-text)]">Período:</strong> {p.period}</span>
+                  <div className="flex flex-wrap gap-4 text-sm text-[#64748b]">
+                    <span><strong className="text-[#0f172a]">Agencia:</strong> {p.agency}</span>
+                    <span><strong className="text-[#0f172a]">Rol:</strong> {p.role}</span>
+                    <span><strong className="text-[#0f172a]">Período:</strong> {p.period}</span>
                     {p.budget && (
-                      <span><strong className="text-[var(--color-text)]">Monto:</strong> {p.budget}</span>
+                      <span><strong className="text-[#0f172a]">Monto:</strong> {p.budget}</span>
                     )}
                   </div>
                 </div>
@@ -95,34 +95,12 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
               <div key={award.id} className="card flex items-start gap-4">
                 <span className="award-year min-w-[100px] text-center">{award.year ?? "—"}</span>
                 <div>
-                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem]">
+                  <h4 className="font-semibold text-[#0f172a] text-[0.9375rem]">
                     {award.title}
                   </h4>
-                  <p className="text-sm text-[var(--color-muted)] mt-0.5">
+                  <p className="text-sm text-[#64748b] mt-0.5">
                     {award.organization}
                   </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </SectionBlock>
-      )}
-
-      {/* ── Eventos Académicos ────────────────────────── */}
-      {profile.events && profile.events.length > 0 && (
-        <SectionBlock id="eventos" title="Eventos Académicos Internacionales">
-          <div className="space-y-4">
-            {profile.events.map((ev) => (
-              <div key={ev.id} className="card project-card">
-                <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
-                  <span className="project-code">{ev.type}</span>
-                  <span className="text-sm font-medium text-[var(--color-secondary)]">{ev.date}</span>
-                </div>
-                <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-2 leading-snug">
-                  {ev.title}
-                </h4>
-                <div className="text-sm text-[var(--color-muted)]">
-                  {ev.location}
                 </div>
               </div>
             ))}

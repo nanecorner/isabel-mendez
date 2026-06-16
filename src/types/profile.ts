@@ -12,9 +12,7 @@ export interface Profile {
   bio: string;             // Párrafo introductorio
   email: string | null;
   phone: string | null;
-  themePrimary: string | null;
-  themeSecondary: string | null;
-  themeFont: string | null;
+  levels: AcademicLevel[];
 }
 
 /** SNI, PRIDE, etc. */
@@ -71,8 +69,10 @@ export interface Award {
 
 export interface AcademicEvent {
   id: string;
+  authors?: string;
   title: string;
-  type: string; // e.g., "Ponencia", "Cartel", "Simposio"
+  venue?: string;
+  type: string; // e.g., "Congreso/Seminario"
   location: string;
   date: string;
 }
@@ -182,6 +182,16 @@ export interface Training {
   date: string | null;
 }
 
+export interface Degree {
+  id: string;
+  level: string;       // "Doctorado", "Maestría", "Licenciatura", "Educación Primaria"
+  title: string;       // "Ciencias Biomédicas"
+  institution: string; // "Facultad de Medicina, UNAM"
+  year: string;        // "2007"
+  thesis?: string;
+  tutor?: string;
+}
+
 // ── PERFIL COMPLETO ─────────────────────────────────────
 
 export type FullProfile = Profile & {
@@ -193,6 +203,7 @@ export type FullProfile = Profile & {
   awards: Award[];
   events: AcademicEvent[];
   training: Training[];
+  degrees: Degree[];
 
   publications: Publication[];
   editorialRoles: EditorialRole[];
