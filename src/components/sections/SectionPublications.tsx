@@ -12,6 +12,10 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
   const articles  = profile.publications.filter((p) => !p.featured && p.type === "article");
   const books     = profile.publications.filter((p) => p.type === "book");
   const chapters  = profile.publications.filter((p) => p.type === "chapter");
+  const editorials= profile.publications.filter((p) => p.type === "editorial");
+  const abstracts = profile.publications.filter((p) => p.type === "conference_abstract");
+  const proceedings = profile.publications.filter((p) => p.type === "proceedings");
+  const outreach  = profile.publications.filter((p) => p.type === "outreach");
 
   const visibleArticles = showAll ? articles : articles.slice(0, 5);
 
@@ -19,26 +23,28 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
     <div className="container-profile pb-16">
 
       {/* ── Artículos Destacados ─────────────────────── */}
-      <SectionBlock id="destacadas" title="Publicaciones Destacadas">
-        <div className="space-y-0">
-          {featured.map((pub) => (
-            <article key={pub.id} className="pub-item">
-              <div className="pub-year">{formatDate(pub.date)}</div>
-              <div>
-                <h3 className="pub-title">{pub.title}</h3>
-                <p className="pub-ref">{pub.reference}</p>
-                <div className="pub-links">
-                  {pub.externalUrl && (
-                    <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                      Ver artículo ↗
-                    </a>
-                  )}
+      {featured.length > 0 && (
+        <SectionBlock id="destacadas" title="Publicaciones Destacadas">
+          <div className="space-y-0">
+            {featured.map((pub) => (
+              <article key={pub.id} className="pub-item">
+                <div className="pub-year">{formatDate(pub.date)}</div>
+                <div>
+                  <h3 className="pub-title">{pub.title}</h3>
+                  <p className="pub-ref">{pub.reference}</p>
+                  <div className="pub-links">
+                    {pub.externalUrl && (
+                      <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                        Ver artículo ↗
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </SectionBlock>
+              </article>
+            ))}
+          </div>
+        </SectionBlock>
+      )}
 
       {/* ── Lista Completa ───────────────────────────── */}
       {articles.length > 0 && (
@@ -96,6 +102,11 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
                       <div>
                         <h4 className="pub-title">{pub.title}</h4>
                         <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver libro ↗</a>
+                          )}
+                        </div>
                       </div>
                     </article>
                   ))}
@@ -115,12 +126,122 @@ export function SectionPublications({ profile }: { profile: FullProfile }) {
                       <div>
                         <h4 className="pub-title">{pub.title}</h4>
                         <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver capítulo ↗</a>
+                          )}
+                        </div>
                       </div>
                     </article>
                   ))}
                 </div>
               </div>
             )}
+          </div>
+        </SectionBlock>
+      )}
+
+      {/* ── Otras Publicaciones ────────────────────────── */}
+      {(editorials.length > 0 || abstracts.length > 0 || proceedings.length > 0 || outreach.length > 0) && (
+        <SectionBlock id="otras-publicaciones" title="Otras Publicaciones">
+          <div className="grid grid-cols-1 gap-8">
+            
+            {editorials.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                  Editorial
+                </h3>
+                <div className="space-y-0">
+                  {editorials.map((pub) => (
+                    <article key={pub.id} className="pub-item">
+                      <div className="pub-year">{formatDate(pub.date)}</div>
+                      <div>
+                        <h4 className="pub-title">{pub.title}</h4>
+                        <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver publicación ↗</a>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {abstracts.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                  Resúmenes de Congreso con Arbitraje
+                </h3>
+                <div className="space-y-0">
+                  {abstracts.map((pub) => (
+                    <article key={pub.id} className="pub-item">
+                      <div className="pub-year">{formatDate(pub.date)}</div>
+                      <div>
+                        <h4 className="pub-title">{pub.title}</h4>
+                        <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver resumen ↗</a>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {proceedings.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                  Memorias In Extenso
+                </h3>
+                <div className="space-y-0">
+                  {proceedings.map((pub) => (
+                    <article key={pub.id} className="pub-item">
+                      <div className="pub-year">{formatDate(pub.date)}</div>
+                      <div>
+                        <h4 className="pub-title">{pub.title}</h4>
+                        <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver memoria ↗</a>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {outreach.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                  Artículos de Difusión y Divulgación
+                </h3>
+                <div className="space-y-0">
+                  {outreach.map((pub) => (
+                    <article key={pub.id} className="pub-item">
+                      <div className="pub-year">{formatDate(pub.date)}</div>
+                      <div>
+                        <h4 className="pub-title">{pub.title}</h4>
+                        <p className="pub-ref">{pub.reference}</p>
+                        <div className="pub-links">
+                          {pub.externalUrl && (
+                            <a href={pub.externalUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost">Ver artículo ↗</a>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </SectionBlock>
       )}

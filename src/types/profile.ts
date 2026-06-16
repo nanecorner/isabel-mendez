@@ -11,6 +11,7 @@ export interface Profile {
   photoUrl: string | null;
   bio: string;             // Párrafo introductorio
   email: string | null;
+  phone: string | null;
   themePrimary: string | null;
   themeSecondary: string | null;
   themeFont: string | null;
@@ -58,18 +59,27 @@ export interface FundedProject {
   role: string;          // ej. "Responsable Técnica"
   period: string;        // ej. "2024–2026"
   status: ProjectStatus;
+  budget: string | null; // ej. "$762,750.00"
 }
 
 export interface Award {
   id: string;
   title: string;
   organization: string;
-  year: number | null;
+  year: string | null;
+}
+
+export interface AcademicEvent {
+  id: string;
+  title: string;
+  type: string; // e.g., "Ponencia", "Cartel", "Simposio"
+  location: string;
+  date: string;
 }
 
 // ── PUBLICACIONES ───────────────────────────────────────
 
-export type PublicationType = "article" | "book" | "chapter" | "editorial";
+export type PublicationType = "article" | "book" | "chapter" | "editorial" | "conference_abstract" | "proceedings" | "outreach";
 
 export interface Publication {
   id: string;
@@ -164,6 +174,14 @@ export interface FooterLink {
   icon: string | null;
 }
 
+export interface Training {
+  id: string;
+  title: string;
+  institution: string;
+  duration: string | null;
+  date: string | null;
+}
+
 // ── PERFIL COMPLETO ─────────────────────────────────────
 
 export type FullProfile = Profile & {
@@ -173,6 +191,9 @@ export type FullProfile = Profile & {
   researchLines: ResearchLine[];
   projects: FundedProject[];
   awards: Award[];
+  events: AcademicEvent[];
+  training: Training[];
+
   publications: Publication[];
   editorialRoles: EditorialRole[];
   theses: Thesis[];

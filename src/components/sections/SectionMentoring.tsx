@@ -103,17 +103,27 @@ export function SectionMentoring({ profile }: { profile: FullProfile }) {
       {/* ── Otras asesorías ──────────────────────────── */}
       {profile.otherAdvising.length > 0 && (
         <SectionBlock id="asesorias" title="Otras Asesorías">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {profile.otherAdvising.map((item) => (
-              <div key={item.id} className="card">
-                <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-1">
-                  {item.type}
-                </h4>
-                <p className="text-sm text-[var(--color-muted)] leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
+          <div className="space-y-8">
+            {Array.from(new Set(profile.otherAdvising.map(a => a.type))).map(type => {
+              const items = profile.otherAdvising.filter(a => a.type === type);
+              return (
+                <div key={type}>
+                  <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                    {type} ({items.length})
+                  </h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    {items.map(item => (
+                      <div key={item.id} className="card flex items-start gap-3">
+                        <div className="committee-dot mt-1.5 shrink-0" />
+                        <p className="text-sm text-[var(--color-text)] leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </SectionBlock>
       )}

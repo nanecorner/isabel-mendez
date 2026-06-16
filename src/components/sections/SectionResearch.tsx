@@ -49,6 +49,9 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
                     <span><strong className="text-[var(--color-text)]">Agencia:</strong> {p.agency}</span>
                     <span><strong className="text-[var(--color-text)]">Rol:</strong> {p.role}</span>
                     <span><strong className="text-[var(--color-text)]">Período:</strong> {p.period}</span>
+                    {p.budget && (
+                      <span><strong className="text-[var(--color-text)]">Monto:</strong> {p.budget}</span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -73,6 +76,9 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
                     <span><strong className="text-[var(--color-text)]">Agencia:</strong> {p.agency}</span>
                     <span><strong className="text-[var(--color-text)]">Rol:</strong> {p.role}</span>
                     <span><strong className="text-[var(--color-text)]">Período:</strong> {p.period}</span>
+                    {p.budget && (
+                      <span><strong className="text-[var(--color-text)]">Monto:</strong> {p.budget}</span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -87,7 +93,7 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
           <div className="space-y-4">
             {profile.awards.map((award) => (
               <div key={award.id} className="card flex items-start gap-4">
-                <span className="award-year">{award.year ?? "—"}</span>
+                <span className="award-year min-w-[100px] text-center">{award.year ?? "—"}</span>
                 <div>
                   <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem]">
                     {award.title}
@@ -95,6 +101,28 @@ export function SectionResearch({ profile }: { profile: FullProfile }) {
                   <p className="text-sm text-[var(--color-muted)] mt-0.5">
                     {award.organization}
                   </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </SectionBlock>
+      )}
+
+      {/* ── Eventos Académicos ────────────────────────── */}
+      {profile.events && profile.events.length > 0 && (
+        <SectionBlock id="eventos" title="Eventos Académicos Internacionales">
+          <div className="space-y-4">
+            {profile.events.map((ev) => (
+              <div key={ev.id} className="card project-card">
+                <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
+                  <span className="project-code">{ev.type}</span>
+                  <span className="text-sm font-medium text-[var(--color-secondary)]">{ev.date}</span>
+                </div>
+                <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] mb-2 leading-snug">
+                  {ev.title}
+                </h4>
+                <div className="text-sm text-[var(--color-muted)]">
+                  {ev.location}
                 </div>
               </div>
             ))}

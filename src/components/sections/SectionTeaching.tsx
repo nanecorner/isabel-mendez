@@ -61,17 +61,17 @@ export function SectionTeaching({ profile }: { profile: FullProfile }) {
       {/* ── Trabajo Institucional ────────────────────── */}
       {profile.committees.length > 0 && (
         <SectionBlock id="comites" title="Comités y Cuerpos Colegiados">
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {profile.committees.map((cm) => (
               <div key={cm.id} className="card flex items-start gap-4">
-                <div className="committee-dot" />
+                <div className="committee-dot mt-1 shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem]">
+                  <h4 className="font-semibold text-[var(--color-text)] text-[0.9375rem] leading-tight mb-1">
                     {cm.role}
                   </h4>
-                  <p className="text-sm text-[var(--color-muted)]">{cm.organization}</p>
+                  <p className="text-sm text-[var(--color-muted)] leading-tight">{cm.organization}</p>
                   {cm.period && (
-                    <p className="text-xs text-[var(--color-accent)] font-semibold mt-1">{cm.period}</p>
+                    <p className="text-xs text-[var(--color-accent)] font-semibold mt-1.5">{cm.period}</p>
                   )}
                 </div>
               </div>

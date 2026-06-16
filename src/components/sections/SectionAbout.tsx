@@ -93,6 +93,27 @@ export function SectionAbout({ profile }: { profile: FullProfile }) {
                   </div>
                 </div>
               </div>
+
+              {/* Cursos de actualización */}
+              {profile.training && profile.training.length > 0 && (
+                <div className="mt-10">
+                  <h3 className="text-sm font-semibold text-[var(--color-muted)] uppercase tracking-wider mb-4">
+                    Cursos de Actualización
+                  </h3>
+                  <div className="space-y-4">
+                    {profile.training.map((t) => (
+                      <div key={t.id} className="degree-item flex flex-col gap-1 items-start">
+                        <span className="font-semibold text-[var(--color-text)]">{t.title}</span>
+                        <span className="text-sm text-[var(--color-muted)]">
+                          {t.institution}
+                          {t.duration && ` • ${t.duration}`}
+                          {t.date && ` • ${t.date}`}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Trayectoria profesional */}
