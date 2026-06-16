@@ -4,7 +4,6 @@ import { ProfileNavbar } from "@/components/layout/ProfileNavbar";
 import { ProfileFooter } from "@/components/layout/ProfileFooter";
 import "./globals.css";
 
-/** Determines if a hex color is perceptually "light" (luma > 0.55) */
 function isLightColor(hex: string): boolean {
   const h = hex.replace("#", "");
   if (h.length !== 6) return false;
@@ -15,29 +14,30 @@ function isLightColor(hex: string): boolean {
 }
 
 export const metadata: Metadata = {
-  title: profile.name,
+  title: {
+    default: profile.name,
+    template: `%s`,
+  },
   description: profile.bio,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const primary   = profile.themePrimary  || "#ffffff";
+}: Readonly<{ children: React.ReactNode }>) {
+  const primary   = profile.themePrimary   || "#ffffff";
   const secondary = profile.themeSecondary || "#000000";
   const font      = profile.themeFont      || "Montserrat";
   const light     = isLightColor(primary);
 
   const themeVars = {
-    "--color-bg-custom":      primary,
-    "--color-accent-custom":  secondary,
-    "--font-family-custom":   `"${font}", sans-serif`,
-    "--color-text":    light ? "#111827"              : "#f1f5f9",
-    "--color-muted":   light ? "#4b5563"              : "#94a3b8",
-    "--color-border":  light ? "rgba(0,0,0,0.12)"     : "rgba(255,255,255,0.14)",
-    "--color-surface": light ? "rgba(0,0,0,0.04)"     : "rgba(255,255,255,0.06)",
-    "--color-card":    light ? "rgba(0,0,0,0.025)"    : "rgba(255,255,255,0.04)",
+    "--color-bg-custom":     primary,
+    "--color-accent-custom": secondary,
+    "--font-family-custom":  `"${font}", sans-serif`,
+    "--color-text":    light ? "#111827"           : "#f1f5f9",
+    "--color-muted":   light ? "#4b5563"           : "#94a3b8",
+    "--color-border":  light ? "rgba(0,0,0,0.12)"  : "rgba(255,255,255,0.14)",
+    "--color-surface": light ? "rgba(0,0,0,0.04)"  : "rgba(255,255,255,0.06)",
+    "--color-card":    light ? "rgba(0,0,0,0.025)" : "rgba(255,255,255,0.04)",
   } as React.CSSProperties;
 
   return (
@@ -50,7 +50,6 @@ export default function RootLayout({
           <style>{`
             @import url('https://fonts.googleapis.com/css2?family=${font.replace(/ /g, "+")}:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
           `}</style>
-
           <ProfileNavbar profile={profile} />
           <main className="flex-grow">{children}</main>
           <ProfileFooter profile={profile} />

@@ -4,51 +4,40 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { FullProfile } from "@/types/profile";
 
+const NAV_LINKS = [
+  { label: "Inicio",        href: "/" },
+  { label: "Investigación", href: "/investigacion" },
+  { label: "Publicaciones", href: "/publicaciones" },
+  { label: "Formación",     href: "/formacion" },
+  { label: "Docencia",      href: "/docencia" },
+  { label: "Divulgación",   href: "/divulgacion" },
+];
+
 export function ProfileNavbar({ profile }: { profile: FullProfile }) {
   const pathname = usePathname();
 
-  const links = [
-    { label: "Inicio", href: "/" },
-    {
-      label: "Trayectoria",
-      href: `/trayectoria`,
-      show: profile.education.length > 0 || profile.experience.length > 0 || profile.teaching.length > 0,
-    },
-    {
-      label: "Publicaciones",
-      href: `/publicaciones`,
-      show: profile.publications.length > 0,
-    },
-    {
-      label: "Galería",
-      href: `/galeria`,
-      show: profile.gallery.length > 0,
-    },
-    {
-      label: "Divulgación",
-      href: `/divulgacion`,
-      show: profile.dissemination.length > 0,
-    },
-  ];
-
   return (
     <div className="profile-navbar">
-      <div className="container-profile">
+      <div className="container-profile flex items-center justify-between">
+        {/* Nombre breve a la izquierda */}
+        <Link href="/" className="navbar-brand">
+          {profile.name}
+        </Link>
+
+        {/* Navegación */}
         <nav>
-          {links
-            .filter((link) => link.show !== false)
-            .map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`nav-link ${isActive ? "active" : ""}`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+          {NAV_LINKS.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`nav-link ${isActive ? "active" : ""}`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </div>

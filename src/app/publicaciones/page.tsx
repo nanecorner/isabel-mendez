@@ -6,9 +6,5 @@ export function generateMetadata() {
 }
 
 export default function PublicationsPage() {
-  return (
-    <div className="container-profile pb-16">
-      <SectionPublications profile={profile} />
-    </div>
-  );
+  return <SectionPublications profile={profile} />;
 }

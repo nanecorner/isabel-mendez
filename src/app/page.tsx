@@ -1,6 +1,13 @@
 import { profile } from "@/lib/profile-data";
-import { SectionHome } from "@/components/sections/SectionHome";
+import { SectionAbout } from "@/components/sections/SectionAbout";
+
+export function generateMetadata() {
+  return {
+    title: profile.name,
+    description: profile.bio,
+  };
+}
 
 export default function HomePage() {
-  return <SectionHome profile={profile} />;
+  return <SectionAbout profile={profile} />;
 }

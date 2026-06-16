@@ -1,141 +1,185 @@
-// Tipos propios del perfil — sin dependencia de @prisma/client
+// ─────────────────────────────────────────────────────────
+// Tipos propios del perfil académico — sin @prisma/client
+// ─────────────────────────────────────────────────────────
 
 export interface Profile {
   id: string;
   slug: string;
   name: string;
+  title: string;           // Cargo actual
+  institution: string;     // Institución actual
   photoUrl: string | null;
-  bio: string;
-  quote: string | null;
-  cvUrl: string | null;
+  bio: string;             // Párrafo introductorio
+  email: string | null;
   themePrimary: string | null;
   themeSecondary: string | null;
   themeFont: string | null;
-  password: string | null;
-  createdAt: Date;
-  updatedAt: Date;
 }
+
+/** SNI, PRIDE, etc. */
+export interface AcademicLevel {
+  id: string;
+  label: string;   // ej. "SNI"
+  value: string;   // ej. "Nivel II"
+}
+
+/** ORCID, Scopus, WoS, ResearchGate... */
+export interface AcademicLink {
+  id: string;
+  label: string;
+  url: string;
+  icon: string | null; // "orcid" | "scopus" | "wos" | "scholar" | "mail"
+}
+
+/** Ítem de la línea de tiempo profesional en la home */
+export interface CareerItem {
+  id: string;
+  period: string;        // ej. "2012 – presente"
+  title: string;
+  institution: string;
+}
+
+// ── INVESTIGACIÓN ───────────────────────────────────────
 
 export interface ResearchLine {
   id: string;
-  profileId: string;
-  order: number;
   title: string;
-  paragraphs: string[];
+  description: string;
+  keywords: string[];
+}
+
+export type ProjectStatus = "vigente" | "concluido";
+
+export interface FundedProject {
+  id: string;
+  code: string;          // ej. "PAPIIT IN223124"
+  title: string;
+  agency: string;        // ej. "DGAPA-UNAM"
+  role: string;          // ej. "Responsable Técnica"
+  period: string;        // ej. "2024–2026"
+  status: ProjectStatus;
 }
 
 export interface Award {
   id: string;
-  profileId: string;
   title: string;
+  organization: string;
   year: number | null;
 }
 
-export interface Society {
-  id: string;
-  profileId: string;
-  name: string;
-}
+// ── PUBLICACIONES ───────────────────────────────────────
 
-export interface Collaboration {
-  id: string;
-  profileId: string;
-  name: string;
-  url: string | null;
-}
-
-export interface Funding {
-  id: string;
-  profileId: string;
-  name: string;
-  url: string | null;
-}
-
-export interface Education {
-  id: string;
-  profileId: string;
-  order: number;
-  graduationDate: string;
-  degree: string;
-  institution: string;
-  city: string | null;
-  country: string | null;
-}
-
-export interface Experience {
-  id: string;
-  profileId: string;
-  order: number;
-  startDate: string;
-  endDate: string | null;
-  title: string;
-  institution: string;
-  city: string | null;
-  country: string | null;
-}
-
-export interface Teaching {
-  id: string;
-  profileId: string;
-  order: number;
-  curriculum: string;
-  course: string;
-  institution: string;
-  city: string | null;
-  country: string | null;
-}
+export type PublicationType = "article" | "book" | "chapter" | "editorial";
 
 export interface Publication {
   id: string;
-  profileId: string;
-  order: number;
+  type: PublicationType;
+  featured: boolean;     // true → aparece en sección destacada
   title: string;
-  date: string;
-  reference: string;
+  date: string;          // ej. "2026-01" o "2025"
+  reference: string;     // referencia completa tal como se muestra
   pdfUrl: string | null;
   isDownloadable: boolean;
   externalUrl: string | null;
 }
 
-export interface GalleryItem {
+/** Roles editoriales */
+export interface EditorialRole {
   id: string;
-  profileId: string;
-  order: number;
-  imageUrl: string;
-  shortName: string;
-  description: string | null;
-}
-
-export interface Dissemination {
-  id: string;
-  profileId: string;
-  order: number;
-  title: string;
-  date: string | null;
+  role: string;          // ej. "Editora Asociada"
+  journal: string;
+  publisher: string | null;
   url: string | null;
 }
 
+// ── FORMACIÓN DE RR.HH. ─────────────────────────────────
+
+export type ThesisLevel = "postdoc" | "doctorado" | "maestria" | "licenciatura";
+export type ThesisStatus = "concluida" | "en_proceso";
+
+export interface Thesis {
+  id: string;
+  level: ThesisLevel;
+  status: ThesisStatus;
+  studentName: string;
+  thesisTitle: string;
+  year: number | null;     // año de conclusión, null si en proceso
+  institution: string;
+}
+
+export interface OtherAdvising {
+  id: string;
+  type: string;          // ej. "Servicio Social", "Estancia Delfín"
+  description: string;
+}
+
+// ── DOCENCIA Y ACADEMIA ─────────────────────────────────
+
+export type TeachingRole = "coordinadora" | "invitada" | "colaboradora";
+
+export interface Course {
+  id: string;
+  name: string;
+  role: TeachingRole;
+  program: string;       // Posgrado, licenciatura, etc.
+  institution: string;
+  period: string | null;
+}
+
+export interface Committee {
+  id: string;
+  role: string;          // ej. "Evaluadora de proyectos PAPIIT"
+  organization: string;
+  period: string | null;
+}
+
+export interface Society {
+  id: string;
+  acronym: string;
+  fullName: string;
+  url: string | null;
+}
+
+// ── DIVULGACIÓN ─────────────────────────────────────────
+
+export type OutreachType = "article" | "media" | "talk";
+
+export interface OutreachItem {
+  id: string;
+  type: OutreachType;
+  title: string;
+  venue: string;         // Revista, programa de radio, evento, etc.
+  date: string | null;
+  url: string | null;
+  embedUrl: string | null; // YouTube embed URL si aplica
+  mediaType: string | null; // "radio" | "tv" | "prensa" | "video" | null
+}
+
+// ── FOOTER ──────────────────────────────────────────────
+
 export interface FooterLink {
   id: string;
-  profileId: string;
-  order: number;
   label: string;
   url: string;
   icon: string | null;
 }
 
-// Perfil completo con todas sus relaciones
+// ── PERFIL COMPLETO ─────────────────────────────────────
+
 export type FullProfile = Profile & {
+  levels: AcademicLevel[];
+  academicLinks: AcademicLink[];
+  career: CareerItem[];
   researchLines: ResearchLine[];
+  projects: FundedProject[];
   awards: Award[];
-  societies: Society[];
-  collaborations: Collaboration[];
-  fundings: Funding[];
-  education: Education[];
-  experience: Experience[];
-  teaching: Teaching[];
   publications: Publication[];
-  gallery: GalleryItem[];
-  dissemination: Dissemination[];
+  editorialRoles: EditorialRole[];
+  theses: Thesis[];
+  otherAdvising: OtherAdvising[];
+  courses: Course[];
+  committees: Committee[];
+  societies: Society[];
+  outreach: OutreachItem[];
   footerLinks: FooterLink[];
 };
